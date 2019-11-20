@@ -17,7 +17,7 @@ int main(){
             printf(" ");
         }
         
-        // start printer
+        // star printer
         for (int starColumn = 1; starColumn <= ((2*((n+1) - row)) -1); starColumn++)
         {
             printf("*");
