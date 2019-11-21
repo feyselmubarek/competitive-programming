@@ -1,19 +1,19 @@
 #include <iostream>
 #include <string>
-#include <bits/stdc++.h>
+// #include <bits/stdc++.h>
 
 using namespace std;
 
 // declaring the function for given operation
 string performAddition(string number1, string number2, string sign);
-string performSubstraction(string number1, string number2, string sign);
+string performSubtraction(string number1, string number2, string sign);
 
 // starting point of the program
 // determines the smaller and larger number to pass to declared functions
 int main()
 {
     // sample big nnumbers
-    string number3 = "-95", number4 = "-10005";
+    string number3 = "-9000099095", number4 = "-100066564343405";
 
     // for determinig sign of the operation
     string sign = "";
@@ -32,12 +32,12 @@ int main()
         if ((number4.length() - 1) > number3.length())
         {
             // 1.inner case: the first one is bigger
-            output = performSubstraction(number4.substr(1), number3, "-");
+            output = performSubtraction(number4.substr(1), number3, "-");
         }
         else if ((number4.length() - 1) < number3.length())
         {
             // 3.inner case: the second one is bigger
-            output = performSubstraction(number3, number4.substr(1), "+");
+            output = performSubtraction(number3, number4.substr(1), "+");
         }
         else
         {
@@ -50,13 +50,13 @@ int main()
                 if ((number4[c + 1] + '0') > (number3[c] + '0'))
                 {
                     // if number 4 is greater
-                    output = performSubstraction(number4.substr(1), number3, "-");
+                    output = performSubtraction(number4.substr(1), number3, "-");
                     return 0;
                 }
                 else if ((number4[c + 1] + '0') < (number3[c] + '0'))
                 {
                     // if number 3 is greater
-                   output = performSubstraction(number3, number4.substr(1), "+");
+                    output = performSubtraction(number3, number4.substr(1), "+");
                     return 0;
                 }
 
@@ -65,7 +65,7 @@ int main()
             }
 
             // both are equal in magnitude : zero will be the result
-            output = performSubstraction(number3, number4.substr(1), "+");
+            output = performSubtraction(number3, number4.substr(1), "+");
         }
     }
 
@@ -75,12 +75,12 @@ int main()
         if (number4.length() > (number3.length() - 1))
         {
             // 1.inner case: if the first number is better
-            output = performSubstraction(number4, number3.substr(1), "+");
+            output = performSubtraction(number4, number3.substr(1), "+");
         }
         else if (number4.length() < (number3.length() - 1))
         {
             // 2.inner case: if the second number is bigger
-            output = performSubstraction(number3.substr(1), number4, "-");
+            output = performSubtraction(number3.substr(1), number4, "-");
         }
         else
         {
@@ -93,19 +93,19 @@ int main()
                 if ((number4[0] + '0') > (number3[1] + '0'))
                 {
                     // if the first number is better
-                    output = performSubstraction(number4, number3.substr(1), "+");
+                    output = performSubtraction(number4, number3.substr(1), "+");
                     return 0;
                 }
                 else if ((number4[0] + '0') < (number3[1] + '0'))
                 {
                     // if the second number is bigger
-                    output = performSubstraction(number3.substr(1), number4, "-");
+                    output = performSubtraction(number3.substr(1), number4, "-");
                     return 0;
                 }
             }
 
             // if both are equal in magnitude, result will be zero
-            output =  performSubstraction(number3.substr(1), number4, "-");
+            output = performSubtraction(number3.substr(1), number4, "-");
         }
     }
     else
@@ -144,7 +144,7 @@ string performAddition(string number1, string number2, string sign)
     for (int i = 0; i < smallerLength; i++)
     {
         int sum = ((number1[i] - '0') + (number2[i] - '0') + carry);
-        operationResult.push_back(sum % 10 + '0');
+        operationResult.append(to_string(sum % 10));
         carry = sum > 9 ? 1 : 0;
     }
 
@@ -152,7 +152,7 @@ string performAddition(string number1, string number2, string sign)
     for (int i = smallerLength; i < largerLength; i++)
     {
         int sum = ((number2[i] - '0') + carry);
-        operationResult.push_back(sum % 10 + '0');
+        operationResult.append(to_string(sum % 10));
         carry = sum > 9 ? 1 : 0;
     }
 
@@ -168,7 +168,7 @@ string performAddition(string number1, string number2, string sign)
     return sign == "+" ? operationResult : ("-" + operationResult);
 }
 
-string performSubstraction(string number1, string number2, string sign)
+string performSubtraction(string number1, string number2, string sign)
 {
     // reversing both numbers for looping
     reverse(number1.begin(), number1.end());
