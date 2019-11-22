@@ -15,9 +15,6 @@ class Solution {
             int number2 = l2 != null ? l2.val : 0;
 
             int sum = number + number2 + carry;
-            System.out.println("num1 = " + number);
-            System.out.println("num2 = " + number2);
-            System.out.println("Sum = " + sum);
             carry = 0;
 
             if (sum > 9) {
