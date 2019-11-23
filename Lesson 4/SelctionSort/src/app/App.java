@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class App {
     public static void main(String[] args) throws Exception {
         RandomGenerator generator = new RandomGenerator();
-        performSelectionSort(generator.getRandomNumber());
+        performSelectionSort(generator.getRandomNumber(10000));
     }
 
     public static void performSelectionSort(ArrayList<Integer> arrayList) {

@@ -15,12 +15,12 @@ public class RandomGenerator {
         random = new Random();
     }
 
-    public ArrayList<Integer> getRandomNumber() {
+    public ArrayList<Integer> getRandomNumber(int howMany) {
         ArrayList<Integer> arrayList = new ArrayList<Integer>();
         Map<Integer, Integer> map = new HashMap<Integer, Integer>();
 
-        while (arrayList.size() < 10000) {
-            int number = random.nextInt(10000) + 1;
+        while (arrayList.size() < howMany) {
+            int number = random.nextInt(howMany) + 1;
             if (!map.containsKey(number)) {
                 arrayList.add(number);
                 map.put(number, number);
