@@ -1,9 +1,9 @@
 package app;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 /**
  * RandomGenerator
@@ -17,13 +17,13 @@ public class RandomGenerator {
 
     public ArrayList<Integer> getRandomNumber(int howMany) {
         ArrayList<Integer> arrayList = new ArrayList<Integer>();
-        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+        Set<Integer> set = new HashSet<>();
 
         while (arrayList.size() < howMany) {
-            int number = random.nextInt(howMany);
-            if (!map.containsKey(number)) {
+            int number = random.nextInt(howMany) + 1;
+            if (!set.contains(number)) {
                 arrayList.add(number);
-                map.put(number, number);
+                set.add(number);
             }
         }
 

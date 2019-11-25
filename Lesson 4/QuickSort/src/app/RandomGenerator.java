@@ -18,23 +18,15 @@ public class RandomGenerator {
 
     public ArrayList<Integer> getRandomNumber(int howMany) {
         ArrayList<Integer> arrayList = new ArrayList<Integer>();
-        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+        Set<Integer> set = new HashSet<>();
 
         while (arrayList.size() < howMany) {
             int number = random.nextInt(howMany) + 1;
-            if (!map.containsKey(number)) {
+            if (!set.contains(number)) {
                 arrayList.add(number);
-                map.put(number, number);
+                set.add(number);
             }
         }
-
-        // System.out.println();
-        // System.out.print("[ ");
-        // for (Integer integer : arrayList) {
-        // System.out.print(integer + ", ");
-        // }
-        // System.out.print(" ]");
-        // System.out.println();
 
         return arrayList;
     }
