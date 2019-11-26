@@ -6,7 +6,16 @@ import java.util.Collections;
 public class App {
     public static void main(String[] args) throws Exception {
         RandomGenerator generator = new RandomGenerator();
-        performInsertionSort(generator.getRandomNumber(10000));
+
+        ArrayList<Integer> arrayList = generator.getRandomNumber(10000);
+
+        // System.out.println("[ ");
+        // for (Integer integer : arrayList) {
+        // System.out.print(integer + ", ");
+        // }
+        // System.out.println("]");
+
+        performInsertionSort(arrayList);
     }
 
     public static void performInsertionSort(ArrayList<Integer> arrayList) {
