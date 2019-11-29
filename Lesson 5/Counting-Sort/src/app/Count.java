@@ -12,7 +12,8 @@ public class Count {
         // arraylist for mapping occurance of each given array element
         Map<Integer, Integer> occ = new HashMap<>();
 
-        // counting occurance an mapping it to occ map
+        // counting occurance an mapping it to occ map the hashing algorithm makes them
+        // inserted by sorted order
         for (int i = 0; i < arrayList.size(); i++) {
             int num = arrayList.get(i);
             if (occ.containsKey(num)) {
@@ -36,6 +37,10 @@ public class Count {
                 result.add(i);
                 c++;
             }
+        }
+
+        for (Integer integer : result) {
+            System.out.print(integer + ", ");
         }
 
         return result;
