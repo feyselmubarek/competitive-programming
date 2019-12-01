@@ -1,0 +1,4 @@
+﻿  Calculator.cpp
+C:\Users\Feysel\source\repos\Calculator\Calculator\Calculator.cpp(367,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Feysel\source\repos\Calculator\Calculator\Calculator.cpp(382,20): warning C4018: '<': signed/unsigned mismatch
+  Calculator.vcxproj -> C:\Users\Feysel\source\repos\Calculator\Debug\Calculator.exe
