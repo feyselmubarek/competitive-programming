@@ -2,6 +2,8 @@ package app;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Radix
@@ -13,23 +15,43 @@ public class Radix {
         result = arrayList;
 
         ArrayList<Integer> sampleNumbers = new ArrayList<>();
-        int s = 10;
+        int s = 10, k = 1;
 
         for (int j = 0; j < 3; j++) {
             sampleNumbers.clear();
             for (int i = 0; i < arrayList.size(); i++) {
-                sampleNumbers.add(arrayList.get(i) % s);
+                int num = arrayList.get(i);
+
+                sampleNumbers.add(num % s / k);
+
+                // arrayList.remove(i);
+                // arrayList.add(i, num / 10);
             }
             s *= 10;
+            k *= 10;
 
             performQuickSort(0, sampleNumbers.size() - 1, sampleNumbers);
+
+            System.out.println();
+            for (int i : sampleNumbers) {
+                System.out.print(i + ", ");
+            }
+            System.out.println();
+
+            System.out.println();
+
+            for (int i = 0; i < result.size(); i++) {
+                System.out.print(result.get(i) + ", ");
+            }
+
+            System.out.println();
         }
 
-        System.out.println();
-        for (int i = 0; i < result.size(); i++) {
-            System.out.print(result.get(i) + ", ");
-        }
-        System.out.println();
+        // System.out.println();
+        // for (int i = 0; i < result.size(); i++) {
+        // System.out.print(result.get(i) + ", ");
+        // }
+        // System.out.println();
 
         return result;
     }

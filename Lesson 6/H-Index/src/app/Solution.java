@@ -2,16 +2,18 @@ package app;
 
 public class Solution {
     public int hIndex(int[] citations) {
+        // sorting the citation in reverse order
         performReverseQuickSort(0, citations.length - 1, citations);
-        int val = 0;
+        int hIndex = 0;
 
         for (int i = 0; i < citations.length; i++) {
+            // check if citation value is greater the number of papers
             if (citations[i] >= i + 1 && citations[i] != 0) {
-                val = i + 1;
+                hIndex = i + 1;
             }
         }
 
-        return val;
+        return hIndex;
     }
 
     public void performReverseQuickSort(int initialIndex, int finalIdnex, int[] array) {
