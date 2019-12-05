@@ -8,15 +8,15 @@ public class App {
         n.next.next.next = new ListNode(4);
         n.next.next.next.next = new ListNode(5);
 
-        ListNode l = new Solution().reverseKGroup(n, 3);
+        ListNode l = new Solution().reverseKGroup(n, 2);
 
         System.out.println();
-        System.out.println("[ ");
+        System.out.print("[ ");
         while (l != null) {
             System.out.print(l.val + ", ");
             l = l.next;
         }
-        System.out.println("]");
+        System.out.print("]");
         System.out.println();
     }
 }
