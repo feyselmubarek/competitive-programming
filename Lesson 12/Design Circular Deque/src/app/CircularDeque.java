@@ -1,16 +1,16 @@
 package app;
 
-// uncompleted version
-public class MyCircularDeque {
-    private int[] deque;
-    private int front, last, mod;
+import java.util.ArrayList;
+
+public class CircularDeque {
+
+    ArrayList<Integer> deque;
+    int size;
 
     /** Initialize your data structure here. Set the size of the deque to be k. */
-    public MyCircularDeque(int k) {
-        deque = new int[k];
-        front = 0;
-        last = 0;
-        mod = k;
+    public CircularDeque(int k) {
+        deque = new ArrayList<>();
+        size = k;
     }
 
     /**
@@ -19,13 +19,7 @@ public class MyCircularDeque {
      */
     public boolean insertFront(int value) {
         if (!isFull()) {
-            if (isEmpty()) {
-                deque[front] = value;
-                // front = (front + 1) % mod;
-            } else {
-                front = (front + 1) % mod;
-                deque[front] = value;
-            }
+            deque.add(0, value);
             return true;
         }
         return false;
@@ -37,13 +31,7 @@ public class MyCircularDeque {
      */
     public boolean insertLast(int value) {
         if (!isFull()) {
-            if (isEmpty()) {
-                deque[last] = value;
-                // last = Math.abs((last - 1) % mod);
-            } else {
-                last = Math.abs((last - 1) % mod);
-                deque[last] = value;
-            }
+            deque.add(value);
             return true;
         }
         return false;
@@ -55,8 +43,7 @@ public class MyCircularDeque {
      */
     public boolean deleteFront() {
         if (!isEmpty()) {
-            deque[front] = -1;
-            front = Math.abs((front - 1) % mod);
+            deque.remove(0);
             return true;
         }
         return false;
@@ -68,8 +55,7 @@ public class MyCircularDeque {
      */
     public boolean deleteLast() {
         if (!isEmpty()) {
-            deque[last] = -1;
-            last = (last + 1) % mod;
+            deque.remove(deque.size() - 1);
             return true;
         }
         return false;
@@ -78,7 +64,7 @@ public class MyCircularDeque {
     /** Get the front item from the deque. */
     public int getFront() {
         if (!isEmpty()) {
-            return deque[front];
+            return deque.get(0);
         }
         return -1;
     }
@@ -86,18 +72,19 @@ public class MyCircularDeque {
     /** Get the last item from the deque. */
     public int getRear() {
         if (!isEmpty()) {
-            return deque[last];
+            return deque.get(deque.size() - 1);
         }
         return -1;
     }
 
     /** Checks whether the circular deque is empty or not. */
     public boolean isEmpty() {
-        return (front == last) && deque[front] > -1;
+        return deque.size() == 0;
     }
 
     /** Checks whether the circular deque is full or not. */
     public boolean isFull() {
-        return (front + 1) % mod == last;
+        return deque.size() == size;
     }
+
 }
