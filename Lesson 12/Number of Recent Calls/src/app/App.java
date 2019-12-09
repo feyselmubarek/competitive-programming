@@ -7,6 +7,6 @@ public class App {
         System.out.println(recentCounter.ping(1));
         System.out.println(recentCounter.ping(100));
         System.out.println(recentCounter.ping(3001));
-        System.out.println(recentCounter.ping(1000000000));
+        System.out.println(recentCounter.ping(3002));
     }
 }

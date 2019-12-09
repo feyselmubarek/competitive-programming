@@ -19,6 +19,8 @@ public class RecentCounter {
             int time = timeStamps.get(i);
             if (time >= min && time <= t) {
                 counter++;
+            } else {
+                break;
             }
         }
 
