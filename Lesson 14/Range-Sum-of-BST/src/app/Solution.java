@@ -2,13 +2,9 @@ package app;
 
 public class Solution {
     public int rangeSumBST(TreeNode root, int L, int R) {
-        if (root == null) {
-            return 0;
-        }
-
         int sum = 0;
 
-        if (root.val >= L && root.val <= R) {
+        if (root != null && root.val >= L && root.val <= R) {
             sum += root.val;
         }
 
