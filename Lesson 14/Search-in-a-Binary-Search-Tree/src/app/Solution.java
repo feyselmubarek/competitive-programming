@@ -12,11 +12,11 @@ public class Solution {
             return root;
         }
 
-        if (root.left != null) {
+        if (root.left != null && root.val >= val) {
             node = searchBST(root.left, val);
         }
 
-        if (root.right != null) {
+        if (root.right != null && root.val <= val) {
             rightNode = searchBST(root.right, val);
         }
 
