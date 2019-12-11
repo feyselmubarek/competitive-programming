@@ -21,7 +21,7 @@ public class Solution {
         l2 = q != null ? q.left : null;
 
         r1 = p != null ? p.right : null;
-        r2 = p != null ? q.right : null;
+        r2 = q != null ? q.right : null;
 
         leftNodeBool = isSameTree(l1, l2);
         rightNodeBool = isSameTree(r1, r2);
