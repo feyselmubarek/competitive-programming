@@ -6,11 +6,6 @@ public class App {
         treeNode.left = new TreeNode(69);
         treeNode.right = new TreeNode(6);
 
-        // treeNode.right.right = new TreeNode(89);
-        // treeNode.right.right.left = new TreeNode(49);
-        // treeNode.right.right.left.left = new TreeNode(52);
-        // treeNode..right = new TreeNode(7);
-
         treeNode.left.right = new TreeNode(89);
         treeNode.left.left = new TreeNode(49);
         treeNode.left.left.right = new TreeNode(52);
