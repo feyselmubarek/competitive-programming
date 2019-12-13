@@ -1,0 +1,13 @@
+// Set<Character> set = new HashSet<>();
+
+        // for (int i = 0; i < 25; i++) {
+        // set.add((char) (i + 97));
+        // }
+
+        // String string = "";
+        // for (int i = 0; i < 200000; i++) {
+        // string += 'a';
+        // }
+        // System.out.println("begin");
+
+        // System.out.println(getPosibleSubString(string, 200000, set));
