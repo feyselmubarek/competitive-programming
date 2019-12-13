@@ -1,41 +1,18 @@
 package app;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Solution {
     public int minDiffInBST(TreeNode root) {
-
-        if (root == null) {
-            return 0;
-        }
-
         ArrayList<TreeNode> stack = new ArrayList<>();
+        ArrayList<Integer> list = new ArrayList<>();
 
         stack.add(root);
-        int num = stack.get(stack.size() - 1).val;
-        int min = 0;
-
-        if (root.left != null) {
-            min = Math.abs(num - root.left.val);
-        } else if (root.right != null) {
-            min = Math.abs(num - root.right.val);
-        }
 
         while (!stack.isEmpty()) {
             TreeNode node = stack.remove(stack.size() - 1);
-            int val = node.val;
-
-            if (val != num) {
-                int dif = Math.abs(num - val);
-                if (dif < min) {
-                    min = dif;
-                } else if (dif > min) {
-                    int temp = dif - min;
-                    if (temp < min) {
-                        min = temp;
-                    }
-                }
-            }
+            list.add(node.val);
 
             if (node.left != null)
                 stack.add(node.left);
@@ -44,6 +21,66 @@ public class Solution {
                 stack.add(node.right);
         }
 
+        performQuickSort(0, list.size() - 1, list);
+
+        System.out.println();
+        System.out.print("[ ");
+        for (Integer integer : list) {
+            System.out.print(integer + ", ");
+        }
+        System.out.print(" ]");
+        System.out.println();
+
+        int first = list.get(0);
+        int second = list.get(1);
+        int min = second - first;
+
+        for (int i = 2; i < list.size(); i++) {
+            first = second;
+            second = list.get(i);
+            System.out.println("fir: " + first);
+            System.out.println("sec: " + second);
+            min = (second - first) < min ? (second - first) : min;
+        }
+
         return min;
+    }
+
+    public static void performQuickSort(int initialIndex, int finalIdnex, ArrayList<Integer> arrayList) {
+
+        if (initialIndex < finalIdnex) {
+            int pivIndex = getSortedPivotIndex(initialIndex, finalIdnex, arrayList);
+            performQuickSort(initialIndex, pivIndex - 1, arrayList);
+            performQuickSort(pivIndex + 1, finalIdnex, arrayList);
+        }
+    }
+
+    public static int getSortedPivotIndex(int intialIndex, int finalIndex, ArrayList<Integer> arrayList) {
+        int pivot = arrayList.get(intialIndex);
+        int pivotIndex = intialIndex;
+
+        while (intialIndex < finalIndex) {
+
+            try {
+                while (arrayList.get(intialIndex) <= pivot) {
+                    intialIndex++;
+                }
+
+                while (arrayList.get(finalIndex) >= pivot) {
+                    finalIndex--;
+                }
+            } catch (Exception e) {
+            }
+
+            if (intialIndex < finalIndex) {
+                Collections.swap(arrayList, intialIndex, finalIndex);
+            }
+        }
+
+        if (finalIndex > pivotIndex) {
+            Collections.swap(arrayList, finalIndex, pivotIndex);
+            return finalIndex;
+        }
+        return pivotIndex;
     }
 }
