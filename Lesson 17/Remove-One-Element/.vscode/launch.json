@@ -1,0 +1,25 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - App2",
+            "request": "launch",
+            "mainClass": "app.App2",
+            "projectName": "Remove-One-Element"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - App3",
+            "request": "launch",
+            "mainClass": "app.App3",
+            "projectName": "Remove-One-Element"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - App",
+            "request": "launch",
+            "mainClass": "app.App",
+            "projectName": "Remove-One-Element"
+        }
+    ]
+}
