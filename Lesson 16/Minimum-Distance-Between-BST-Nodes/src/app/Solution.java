@@ -23,14 +23,6 @@ public class Solution {
 
         performQuickSort(0, list.size() - 1, list);
 
-        System.out.println();
-        System.out.print("[ ");
-        for (Integer integer : list) {
-            System.out.print(integer + ", ");
-        }
-        System.out.print(" ]");
-        System.out.println();
-
         int first = list.get(0);
         int second = list.get(1);
         int min = second - first;
@@ -38,8 +30,6 @@ public class Solution {
         for (int i = 2; i < list.size(); i++) {
             first = second;
             second = list.get(i);
-            System.out.println("fir: " + first);
-            System.out.println("sec: " + second);
             min = (second - first) < min ? (second - first) : min;
         }
 
