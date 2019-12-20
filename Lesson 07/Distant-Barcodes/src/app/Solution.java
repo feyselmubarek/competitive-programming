@@ -1,21 +1,44 @@
 package app;
 
-public class Solution {
-    public int[] rearrangeBarcodes(int[] barcodes) {
-        int current = barcodes[0];
+import java.util.HashMap;
 
-        for (int i = 1; i < barcodes.length; i++) {
-            int j = i + 1;
-            while (barcodes[i] == current) {
-                current = barcodes[j];
-                j++;
+public class Solution {
+    /**
+     * NOTE => not fully working solution for a complete solution see Solution2
+     */
+    public int[] rearrangeBarcodes(int[] barcodes) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        int[] result = new int[barcodes.length];
+
+        for (int i = 0; i < barcodes.length; i++) {
+            int num = barcodes[i];
+
+            if (map.containsKey(num)) {
+                map.put(num, map.get(num) + 1);
+            } else {
+                map.put(num, 1);
             }
-            j--;
-            int val = barcodes[i];
-            barcodes[j] = val;
-            barcodes[i] = current;
         }
 
-        return barcodes;
+        int zeroIndex = 0, oneIndex = 1;
+
+        for (int i : map.keySet()) {
+            int occ = map.get(i);
+
+            while (occ > 0) {
+                if (zeroIndex < result.length) {
+                    result[zeroIndex] = i;
+                    occ--;
+                    zeroIndex += 2;
+
+                } else if (oneIndex < result.length) {
+                    result[oneIndex] = i;
+                    occ--;
+                    oneIndex += 2;
+                }
+            }
+        }
+
+        return result;
     }
 }
