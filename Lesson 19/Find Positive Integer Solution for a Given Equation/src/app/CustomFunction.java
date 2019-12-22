@@ -4,7 +4,7 @@ public class CustomFunction implements InnerCustomFunction {
 
     @Override
     public int f(int x, int y) {
-        return x + y;
+        return x * y;
     }
     // Returns f(x, y) for any given positive integers x and y.
     // Note that f(x, y) is increasing with respect to both x and y.
