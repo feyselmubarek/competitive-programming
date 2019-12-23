@@ -6,27 +6,26 @@ package app;
 public class Solution {
     public int hIndex(int[] citations) {
         int length = citations.length, i = 0, j = length - 1;
-        int mid = ((i + j) + 1) / 2;
+        int mid = 0;
 
-        while (j - i > 1) {
+        while (i <= j) {
+            mid = i == j ? i : ((i + j) - 1) / 2;
             int numberOfPapers = length - mid;
+            System.out.println();
+            System.out.println("i => " + i);
+            System.out.println("j => " + j);
+            System.out.println("mid => " + mid);
+            System.out.println("numPa => " + numberOfPapers);
+            System.out.println();
 
-            if (numberOfPapers > citations[mid]) {
-                j = mid;
-            } else if (numberOfPapers < citations[mid]) {
-                i = mid;
+            if (numberOfPapers < citations[mid]) {
+                j = mid - 1;
+            } else if (numberOfPapers > citations[mid]) {
+                i = mid + 1;
             } else {
-                return mid;
+                return numberOfPapers;
             }
-            mid = ((i + j) + 1) / 2;
         }
-
-        if ((length - i) <= citations[i]) {
-            return (length - i);
-        } else if ((length - j) >= citations[i]) {
-            return (length - j);
-        }
-
-        return -1;
+        return length - i;
     }
 }
