@@ -11,12 +11,6 @@ public class Solution {
         while (i <= j) {
             mid = i == j ? i : ((i + j) - 1) / 2;
             int numberOfPapers = length - mid;
-            System.out.println();
-            System.out.println("i => " + i);
-            System.out.println("j => " + j);
-            System.out.println("mid => " + mid);
-            System.out.println("numPa => " + numberOfPapers);
-            System.out.println();
 
             if (numberOfPapers < citations[mid]) {
                 j = mid - 1;
