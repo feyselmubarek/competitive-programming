@@ -2,15 +2,16 @@ package app;
 
 // uncompleted version
 public class MyCircularDeque {
-    private int[] deque;
-    private int front, last, mod;
+    public int[] deque;
+    public int front, last, capacity, length;
 
     /** Initialize your data structure here. Set the size of the deque to be k. */
     public MyCircularDeque(int k) {
         deque = new int[k];
         front = 0;
         last = 0;
-        mod = k;
+        length = 0;
+        capacity = k;
     }
 
     /**
@@ -21,11 +22,11 @@ public class MyCircularDeque {
         if (!isFull()) {
             if (isEmpty()) {
                 deque[front] = value;
-                // front = (front + 1) % mod;
             } else {
-                front = (front + 1) % mod;
+                front = (front + 1) % capacity;
                 deque[front] = value;
             }
+            length++;
             return true;
         }
         return false;
@@ -39,11 +40,11 @@ public class MyCircularDeque {
         if (!isFull()) {
             if (isEmpty()) {
                 deque[last] = value;
-                // last = Math.abs((last - 1) % mod);
             } else {
-                last = Math.abs((last - 1) % mod);
+                last = last == 0 ? capacity - 1 : Math.abs((last - 1) % capacity);
                 deque[last] = value;
             }
+            length++;
             return true;
         }
         return false;
@@ -55,8 +56,10 @@ public class MyCircularDeque {
      */
     public boolean deleteFront() {
         if (!isEmpty()) {
-            deque[front] = -1;
-            front = Math.abs((front - 1) % mod);
+            if (length != 1) {
+                front = front == 0 ? capacity - 1 : Math.abs((front - 1) % capacity);
+            }
+            length--;
             return true;
         }
         return false;
@@ -68,8 +71,10 @@ public class MyCircularDeque {
      */
     public boolean deleteLast() {
         if (!isEmpty()) {
-            deque[last] = -1;
-            last = (last + 1) % mod;
+            if (length != 1) {
+                last = (last + 1) % capacity;
+            }
+            length--;
             return true;
         }
         return false;
@@ -93,11 +98,11 @@ public class MyCircularDeque {
 
     /** Checks whether the circular deque is empty or not. */
     public boolean isEmpty() {
-        return (front == last) && deque[front] > -1;
+        return length == 0;
     }
 
     /** Checks whether the circular deque is full or not. */
     public boolean isFull() {
-        return (front + 1) % mod == last;
+        return length == capacity;
     }
 }

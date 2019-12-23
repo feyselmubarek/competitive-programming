@@ -2,17 +2,24 @@ package app;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        CircularDeque circularDeque = new CircularDeque(3); // set the size to be
-        System.out.println(circularDeque.insertFront(1));// return true
-        System.out.println(circularDeque.insertLast(2)); // return true
-        System.out.println(circularDeque.insertFront(3)); // return true
-        System.out.println(circularDeque.insertFront(4)); // return false, the queue
+        MyCircularDeque circularDeque = new MyCircularDeque(2); // set the size to be
+        // System.out.println(circularDeque.insertFront(7));
+        // System.out.println(circularDeque.deleteLast());
+        // System.out.println(circularDeque.getFront());
+        // System.out.println(circularDeque.insertLast(5));
+        // System.out.println(circularDeque.insertFront(0));
+        // System.out.println(circularDeque.getFront());
+        // System.out.println(circularDeque.getRear());
+        // System.out.println(circularDeque.getFront());
+        // System.out.println(circularDeque.getFront());
+        // System.out.println(circularDeque.getRear());
+        // System.out.println(circularDeque.insertLast(0));
 
-        System.out.println(circularDeque.getRear()); // return 2
-        System.out.println(circularDeque.isFull()); // return true
-        System.out.println(circularDeque.deleteLast()); // return true
-        System.out.println(circularDeque.insertFront(4)); // return true
-        System.out.println(circularDeque.getFront()); // return 4
-        // System.out.println(4 % 3);
+        System.out.println(circularDeque.insertFront(2));
+        System.out.println(circularDeque.getFront());
+        System.out.println(circularDeque.isEmpty());
+        System.out.println(circularDeque.front);
+        System.out.println(circularDeque.last);
+        System.out.println(circularDeque.deleteFront());
     }
 }
