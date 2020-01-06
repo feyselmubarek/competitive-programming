@@ -2,7 +2,7 @@ package app;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        System.out.println(new App().myPow(2.00000, 214));
+        System.out.println(new App().myPow(2.00000, 2));
     }
 
     public double myPow(double x, int n) {
