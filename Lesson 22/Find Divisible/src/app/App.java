@@ -23,17 +23,8 @@ public class App {
     }
 
     private static String printDivisblePair(String string) {
-        String[] arr = string.split(" ");
+        int l = Integer.parseInt(string.split(" ")[0]);
 
-        int l = Integer.parseInt(arr[0]);
-        int r = Integer.parseInt(arr[1]);
-
-        for (int i = l; i <= r; i++) {
-            if ((2 * i) <= r && i != 0) {
-                return i + " " + (2 * i);
-            }
-        }
-
-        return "";
+        return l + " " + (2 * l);
     }
 }
