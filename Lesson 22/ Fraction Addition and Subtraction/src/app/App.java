@@ -3,67 +3,53 @@ package app;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        System.out.println(new App().fractionAddition("-1/2+1/2+2/3"));
-        // System.out.println(new App().findGCD(0, 4));
+        System.out.println(new App().fractionAddition("-1/3+1/2"));
+        // System.out.println(new App().findGCD(-5, 50));
     }
 
     public String fractionAddition(String expression) {
         // considering the form => (a/b) + (c/d)
-        int a = 0, b = 0, c = 0, d = 0;
-        boolean isAfound = false, isBfound = false, isCfound = false;
+        int a = 0, b = 1, c = 0, d = 0;
+        boolean isTheOperatorPlus = true;
         String number = "";
+        int starter = 0;
 
-        for (int i = 0; i < expression.length(); i++) {
+        if (expression.charAt(0) == '-') {
+            starter = 1;
+            isTheOperatorPlus = false;
+        }
+
+        for (int i = starter; i < expression.length(); i++) {
             char ch = expression.charAt(i);
 
             if (ch == '-') {
-                if (number.equals("")) {
-                    number += ch;
-                } else {
-                    if (!isBfound) {
-                        b = Integer.parseInt(number);
-                        isBfound = true;
-                    } else {
-                        d = Integer.parseInt(number);
+                d = Integer.parseInt(number);
 
-                        a = (a * d) - (b * c);
-                        b = b * d;
+                a = isTheOperatorPlus ? (a * d) + (b * c) : (a * d) - (b * c);
+                b = b * d;
 
-                        int gcd = findGCD(a, b);
-                        a = a / gcd;
-                        b = b / gcd;
+                int gcd = findGCD(Math.abs(a), Math.abs(b));
+                a = a / gcd;
+                b = b / gcd;
 
-                        isCfound = false;
-                    }
-                    number = "";
-                }
-            } else if (ch == '+') {
-                // related b, d
-                if (!isBfound) {
-                    b = Integer.parseInt(number);
-                    isBfound = true;
-                } else {
-                    d = Integer.parseInt(number);
-
-                    a = (a * d) + (b * c);
-                    b = b * d;
-
-                    int gcd = findGCD(a, b);
-                    a = a / gcd;
-                    b = b / gcd;
-
-                    isCfound = false;
-                }
+                isTheOperatorPlus = false;
                 number = "";
+
+            } else if (ch == '+') {
+                d = Integer.parseInt(number);
+
+                a = isTheOperatorPlus ? (a * d) + (b * c) : (a * d) - (b * c);
+                b = b * d;
+
+                int gcd = findGCD(Math.abs(a), Math.abs(b));
+                a = a / gcd;
+                b = b / gcd;
+
+                isTheOperatorPlus = true;
+                number = "";
+
             } else if (ch == '/') {
-                // related a, c
-                if (!isAfound) {
-                    a = Integer.parseInt(number);
-                    isAfound = true;
-                } else if (!isCfound) {
-                    c = Integer.parseInt(number);
-                    isCfound = true;
-                }
+                c = Integer.parseInt(number);
                 number = "";
             } else {
                 number += ch;
@@ -72,10 +58,10 @@ public class App {
 
         d = Integer.parseInt(number);
 
-        a = (a * d) + (b * c);
+        a = isTheOperatorPlus ? (a * d) + (b * c) : (a * d) - (b * c);
         b = b * d;
 
-        int gcd = findGCD(a, b);
+        int gcd = findGCD(Math.abs(a), Math.abs(b));
         a = a / gcd;
         b = b / gcd;
 
