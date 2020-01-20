@@ -10,11 +10,7 @@ public class App {
     }
 
     public int maxDepth(Node root) {
-        Stack<Node> stack = new Stack<>();
-        HashSet<Node> set = new HashSet<>();
-
         if (root != null) {
-            stack.push(root);
 
             if (root.children == null) {
                 return 1;
@@ -23,14 +19,10 @@ public class App {
             int childMaxDepth = 0;
 
             for (Node child : root.children) {
-                if (!set.contains(child)) {
-                    set.add(child);
+                int childDepth = maxDepth(child);
 
-                    int childDepth = maxDepth(child);
-
-                    if (childDepth > childMaxDepth) {
-                        childMaxDepth = childDepth;
-                    }
+                if (childDepth > childMaxDepth) {
+                    childMaxDepth = childDepth;
                 }
             }
 
