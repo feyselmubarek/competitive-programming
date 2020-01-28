@@ -2,7 +2,7 @@ package app;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        System.out.println(new App().isSubsequence("Hello Java", "Hello Javaello Java"));
+        System.out.println(new App().isSubsequence("abcd", "a"));
     }
 
     public boolean isSubsequence(String s, String t) {
