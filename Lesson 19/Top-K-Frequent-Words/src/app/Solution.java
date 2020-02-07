@@ -1,6 +1,7 @@
 package app;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.PriorityQueue;
@@ -10,49 +11,52 @@ public class Solution {
         HashMap<String, Integer> occuranceMap = new HashMap<String, Integer>();
 
         for (int last = 0; last < words.length; last++) {
-            if (occuranceMap.containsKey(words[last]))
-                occuranceMap.put(words[last], occuranceMap.get(words[last]) + 1);
-            else
-                occuranceMap.put(words[last], 1);
+            occuranceMap.put(words[last],
+                    occuranceMap.containsKey(words[last]) ? occuranceMap.get(words[last]) + 1 : 1);
         }
 
-        PriorityQueue<Pair> priorityQueue = new PriorityQueue<Pair>(occuranceMap.size(), (a, b) -> (b.y - a.y));
-        PriorityQueue<String> secondPriorityQueue = new PriorityQueue<String>((a, b) -> (a.compareTo(b)));
+        PriorityQueue<Word> minHeap = new PriorityQueue<>(k);
 
-        for (String last : occuranceMap.keySet())
-            priorityQueue.add(new Pair(last, occuranceMap.get(last)));
+        for (String w : occuranceMap.keySet()) {
+            Word word = new Word(w, occuranceMap.get(w));
 
-        List<String> result = new ArrayList<>();
-        Pair top = priorityQueue.remove();
-        int curOcuVal = top.y;
-
-        for (int i = 0; i < k;) {
-            while (curOcuVal == top.y) {
-                secondPriorityQueue.add(top.x);
-                curOcuVal = top.y;
-
-                top = priorityQueue.remove();
+            if (minHeap.size() < k) {
+                minHeap.add(word);
+            } else {
+                if (minHeap.peek().compareTo(word) < 0) {
+                    minHeap.poll();
+                    minHeap.add(word);
+                }
             }
-
-            while (i < k && secondPriorityQueue.size() != 0) {
-                result.add(secondPriorityQueue.remove());
-                i++;
-            }
-
-            curOcuVal = top.y;
         }
 
-        return result;
+        List<String> list = new ArrayList<>();
+
+        for (int i = 0; i < k; i++) {
+            list.add(minHeap.poll().title);
+        }
+
+        Collections.reverse(list);
+
+        return list;
     }
 }
 
-class Pair {
-    // x represents word, y is occurance
-    public String x;
-    public int y;
+class Word implements Comparable<Word> {
+    public String title;
+    public int occurance;
 
-    public Pair(String x, int y) {
-        this.x = x;
-        this.y = y;
+    public Word(String title, int occurance) {
+        this.title = title;
+        this.occurance = occurance;
+    }
+
+    @Override
+    public int compareTo(Word o) {
+        if (this.occurance > o.occurance || (this.occurance == o.occurance && (this.title.compareTo(o.title) < 0))) {
+            return 1;
+        }
+
+        return -1;
     }
 }
