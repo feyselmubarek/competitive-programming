@@ -1,7 +1,7 @@
 package app;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Objects;
+import java.util.Stack;
 
 /**
  * MinStack
@@ -9,39 +9,94 @@ import java.util.Collections;
 public class MinStack {
 
     /** initialize your data structure here. */
-    private ArrayList<Integer> stack;
-    int min = 0;
+    private Stack<Pair<Integer, Integer>> stack;
 
     public MinStack() {
-        stack = new ArrayList<>();
+        // pair elemenrt : min
+        stack = new Stack<>();
     }
 
     public void push(int x) {
-        stack.add(x);
-        min = Collections.min(stack);
+        int min = x;
+
+        if (stack.size() != 0 && stack.peek().getSecond() < x) {
+            min = stack.peek().getSecond();
+        }
+
+        stack.push(new Pair<>(x, min));
     }
 
     public void pop() {
-        if (getSize() > 0) {
-            int tempMin = stack.remove(getSize() - 1);
-            if (tempMin == min && getSize() > 0) {
-                min = Collections.min(stack);
-            }
+        if (!stack.isEmpty()) {
+            stack.pop();
         }
     }
 
     public int top() {
-        if (getSize() > 0) {
-            return stack.get(getSize() - 1);
+        if (!stack.isEmpty()) {
+            return stack.peek().getFirst();
         }
-        return 0;
+
+        return -1;
     }
 
     public int getMin() {
-        return min;
-    }
+        if (!stack.isEmpty()) {
+            return stack.peek().getSecond();
+        }
 
-    public int getSize() {
-        return stack.size();
+        return -1;
     }
 }
+
+class Pair<F extends Comparable<F>, S extends Comparable<S>> implements Comparable<Pair<F, S>> {
+    private F first;
+    private S second;
+
+    public Pair() {
+    }
+
+    public Pair(F first, S second) {
+        this.first = first;
+        this.second = second;
+    }
+
+    public F getFirst() {
+        return first;
+    }
+
+    public S getSecond() {
+        return second;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Pair<?, ?>) {
+            Pair<?, ?> pair = (Pair<?, ?>) obj;
+            return pair.first.equals(this.first) && pair.second.equals(this.second);
+        }
+
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(first, second);
+    }
+
+    @Override
+    public int compareTo(Pair<F, S> o) {
+        return this.getFirst().compareTo(o.getFirst());
+    }
+
+    @Override
+    public String toString() {
+        return "{ " + getFirst() + " : " + getSecond() + " }";
+    }
+}
+
+/**
+ * Your MinStack object will be instantiated and called as such: MinStack obj =
+ * new MinStack(); obj.push(x); obj.pop(); int param_3 = obj.top(); int param_4
+ * = obj.getMin();
+ */
