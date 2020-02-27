@@ -13,8 +13,8 @@ public class App {
 
         int[] res = new Solution().dailyTemperatures(a);
 
-        // for (int i : res) {
-        // System.out.print(i + ", ");
-        // }
+        for (int i : res) {
+            System.out.print(i + ", ");
+        }
     }
 }
