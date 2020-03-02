@@ -2,25 +2,39 @@ package app;
 
 public class Solution {
     public int findBottomLeftValue(TreeNode root) {
-
+        return find(root, 0).node.val;
     }
 
-    public int[] getLevelAndValue(TreeNode node, int level) {
-        int[] leftLevelValue = new int[2];
-        int[] rightLevelValue = new int[2];
-
+    public State find(TreeNode node, int level) {
         if (node == null) {
             return null;
         }
 
-        if (node.left != null) {
-            leftLevelValue = getLevelAndValue(node.left, (level + 1));
+        State res = new State(node, level);
+        State left = find(node.left, level + 1);
+        ;
+        State right = find(node.right, level + 1);
+
+        if (left != null) {
+            res = left;
         }
 
-        if (node.right != null) {
-            rightLevelValue = getLevelAndValue(node.right, (level + 1));
+        if (right != null) {
+            if (res == null || right.level > res.level) {
+                res = right;
+            }
         }
 
-        return null;
+        return res;
+    }
+}
+
+class State {
+    public TreeNode node;
+    public int level;
+
+    public State(TreeNode node, int level) {
+        this.node = node;
+        this.level = level;
     }
 }
