@@ -1,35 +1,33 @@
 package app;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Solution {
     public List<Integer> postorderTraversal(TreeNode root) {
-        List<Integer> list = new ArrayList<>();
-        List<Integer> leftNode = null, rightNode = null;
+        List<Integer> postOrderList = new ArrayList<>();
 
         if (root == null) {
-            return list;
+            return postOrderList;
         }
 
-        if (root.left != null) {
-            leftNode = postorderTraversal(root.left);
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+
+        while (!stack.isEmpty()) {
+            TreeNode currentNode = stack.pop();
+            postOrderList.add(currentNode.val);
+
+            if (currentNode.left != null) {
+                stack.push(currentNode.left);
+            }
+
+            if (currentNode.right != null) {
+                stack.push(currentNode.right);
+            }
         }
 
-        if (root.right != null) {
-            rightNode = postorderTraversal(root.right);
-        }
+        Collections.reverse(postOrderList);
 
-        if (leftNode != null) {
-            list.addAll(leftNode);
-        }
-
-        if (rightNode != null) {
-            list.addAll(rightNode);
-        }
-
-        list.add(root.val);
-
-        return list;
+        return postOrderList;
     }
 }
