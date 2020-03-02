@@ -1,76 +1,31 @@
 package app;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.*;
 
 public class Solution {
     public int minDiffInBST(TreeNode root) {
-        ArrayList<TreeNode> stack = new ArrayList<>();
-        ArrayList<Integer> list = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
 
-        stack.add(root);
+        int min = Integer.MAX_VALUE;
+        TreeNode node = root;
+        TreeNode prev = null;
 
-        while (!stack.isEmpty()) {
-            TreeNode node = stack.remove(stack.size() - 1);
-            list.add(node.val);
+        while (!stack.isEmpty() || node != null) {
+            if (node != null) {
+                stack.push(node);
+                node = node.left;
+            } else {
+                node = stack.pop();
 
-            if (node.left != null)
-                stack.add(node.left);
+                if (prev != null) {
+                    min = Math.min(min, node.val - prev.val);
+                }
 
-            if (node.right != null)
-                stack.add(node.right);
-        }
-
-        performQuickSort(0, list.size() - 1, list);
-
-        int first = list.get(0);
-        int second = list.get(1);
-        int min = second - first;
-
-        for (int i = 2; i < list.size(); i++) {
-            first = second;
-            second = list.get(i);
-            min = (second - first) < min ? (second - first) : min;
+                prev = node;
+                node = node.right;
+            }
         }
 
         return min;
-    }
-
-    public static void performQuickSort(int initialIndex, int finalIdnex, ArrayList<Integer> arrayList) {
-
-        if (initialIndex < finalIdnex) {
-            int pivIndex = getSortedPivotIndex(initialIndex, finalIdnex, arrayList);
-            performQuickSort(initialIndex, pivIndex - 1, arrayList);
-            performQuickSort(pivIndex + 1, finalIdnex, arrayList);
-        }
-    }
-
-    public static int getSortedPivotIndex(int intialIndex, int finalIndex, ArrayList<Integer> arrayList) {
-        int pivot = arrayList.get(intialIndex);
-        int pivotIndex = intialIndex;
-
-        while (intialIndex < finalIndex) {
-
-            try {
-                while (arrayList.get(intialIndex) <= pivot) {
-                    intialIndex++;
-                }
-
-                while (arrayList.get(finalIndex) >= pivot) {
-                    finalIndex--;
-                }
-            } catch (Exception e) {
-            }
-
-            if (intialIndex < finalIndex) {
-                Collections.swap(arrayList, intialIndex, finalIndex);
-            }
-        }
-
-        if (finalIndex > pivotIndex) {
-            Collections.swap(arrayList, finalIndex, pivotIndex);
-            return finalIndex;
-        }
-        return pivotIndex;
     }
 }
