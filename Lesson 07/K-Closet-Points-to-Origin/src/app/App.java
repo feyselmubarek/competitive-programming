@@ -10,13 +10,13 @@ public class App {
             n[i] = new int[] { 1000 - i, 10000 - i };
         }
 
-        int[][] r = new Solution().kClosest(null, 10);
+        int[][] r = new Solution().kClosest(b, 2);
 
-        System.out.println(r == null);
-        // System.out.println();
-        // for (int[] is : r) {
-        // System.out.print("[ " + is[0] + ", " + is[1] + " ], ");
-        // }
-        // System.out.println();
+        // System.out.println(r == null);
+        System.out.println();
+        for (int[] is : r) {
+            System.out.print("[ " + is[0] + ", " + is[1] + " ], ");
+        }
+        System.out.println();
     }
 }
