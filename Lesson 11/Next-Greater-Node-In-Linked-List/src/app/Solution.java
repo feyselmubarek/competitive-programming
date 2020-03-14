@@ -1,6 +1,6 @@
 package app;
 
-import java.util.ArrayList;
+import java.util.Stack;
 
 public class Solution {
     public int[] nextLargerNodes(ListNode head) {
@@ -8,31 +8,53 @@ public class Solution {
             return null;
         }
 
-        ArrayList<Integer> arrayList = new ArrayList<>();
-        ListNode cuurentNode = head;
-        boolean isFound = false;
+        return getNextLargestArray(head);
+    }
 
-        while (cuurentNode.next != null) {
-            int curentTemp = cuurentNode.val;
-            ListNode nextNode = cuurentNode.next;
-            isFound = false;
+    public int[] getNextLargestArray(ListNode head) {
+        // reversing linked list
+        ListNode prev = head;
+        ListNode curr = prev.next;
 
-            while (nextNode != null) {
-                if (curentTemp < nextNode.val) {
-                    arrayList.add(nextNode.val);
-                    isFound = true;
-                    break;
-                }
-                nextNode = nextNode.next;
-            }
+        prev.next = null;
+        ListNode next;
+        int size = 1;
 
-            if (!isFound) {
-                arrayList.add(0);
-            }
-            cuurentNode = cuurentNode.next;
+        while (curr != null) {
+            next = curr.next;
+            curr.next = prev;
+
+            prev = curr;
+            curr = next;
+            size++;
         }
-        arrayList.add(0);
 
-        return arrayList.stream().mapToInt(i -> i).toArray();
+        int[] nextLargeArr = new int[size];
+        populateNextLarge(nextLargeArr, prev);
+
+        return nextLargeArr;
+    }
+
+    public void populateNextLarge(int[] nextLargeArr, ListNode node) {
+        Stack<Integer> stack = new Stack<>();
+        int index = nextLargeArr.length - 1;
+
+        while (index >= 0) {
+            int nextLarge = 0;
+
+            while (!stack.isEmpty() && stack.peek() <= node.val) {
+                stack.pop();
+            }
+
+            if (!stack.isEmpty()) {
+                nextLarge = stack.peek();
+            }
+
+            nextLargeArr[index] = nextLarge;
+            index--;
+
+            stack.push(node.val);
+            node = node.next;
+        }
     }
 }

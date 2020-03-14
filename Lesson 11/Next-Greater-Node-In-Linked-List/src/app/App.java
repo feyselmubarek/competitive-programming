@@ -13,10 +13,10 @@ public class App {
         // 1,7,5,1,9,2,5,1
         // 2,7,4,3,5
 
-        int[] m = new Solution().nextLargerNodes(null);
+        int[] m = new Solution().nextLargerNodes(n);
 
-        // for (int i = 0; i < m.length; i++) {
-        // System.out.print(m[i] + ", ");
-        // }
+        for (int i = 0; i < m.length; i++) {
+            System.out.print(m[i] + ", ");
+        }
     }
 }
