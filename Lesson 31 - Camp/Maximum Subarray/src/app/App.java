@@ -15,15 +15,8 @@ public class App {
         int maxSum = nums[0];
 
         for (int i = 1; i < nums.length; i++) {
-            if (maxPrev + nums[i] > nums[i]) {
-                maxPrev += nums[i];
-            } else {
-                maxPrev = nums[i];
-            }
-
-            if (maxPrev > maxSum) {
-                maxSum = maxPrev;
-            }
+            maxPrev = Math.max(maxPrev + nums[i], nums[i]);
+            maxSum = Math.max(maxSum, maxPrev);
         }
 
         return maxSum;
